@@ -1,0 +1,29 @@
+### Shutdown ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o glOdbcSh.o $GALYK_HOME/test/glOdbcSh.c
+
+gcc -o glOdbcSh $GALYK_HOME/build/glShutdown.o glOdbcSh.o -L$GOLDILOCKS_HOME/lib -lgoldilocks -lpthread -ldl -lm -lrt
+
+rm glOdbcSh glOdbcSh.o
+
+### Startup ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o glOdbcSh.o $GALYK_HOME/test/glOdbcSh.c
+
+gcc -o glOdbcSh $GALYK_HOME/build/glStartup.o $GALYK_HOME/build/glPrintDiagnosticRecord.o $GALYK_HOME/build/glSelect.o glOdbcSh.o -L$GOLDILOCKS_HOME/lib -lgoldilocks -lpthread -ldl -lm -lrt
+
+### PrintDiagnosticRecord ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o $GALYK_HOME/build/glPrintDiagnosticRecord.o $GALYK_HOME/src/glPrintDiagnosticRecord.c
+
+### Select ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o $GALYK_HOME/build/glSelect.o $GALYK_HOME/src/glSelect.c
+
+### Compare Scn ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o $GALYK_HOME/build/glGetMemberInfo.o $GALYK_HOME/src/glGetMemberInfo.c
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o $GALYK_HOME/build/glCompareScn.o $GALYK_HOME/src/glCompareScn.c
+
+########### gcc -o ###########
+gcc -o $GALYK_HOME/bin/galyk  $GALYK_HOME/build/${BINS}.o  -L$GOLDILOCKS_HOME/lib -lgoldilocks -lpthread -ldl -lm -lrt
+
+
+### jiyeong_test ###
+gcc -g -fPIC -Wall -c -I$GALYK_HOME/include -I$GOLDILOCKS_HOME/include -o $GALYK_HOME/build/glMemberInfoJy.o $GALYK_HOME/test/glMemberInfoJy.c
+gcc -o $GALYK_HOME/bin/galyk  $GALYK_HOME/build/glPrintDiagnosticRecord.o $GALYK_HOME/build/glSelect.o  $GALYK_HOME/build/glGetMemberInfo.o $GALYK_HOME/build/glCompareScn.o $GALYK_HOME/build/glMemberInfoJy.o -L$GOLDILOCKS_HOME/lib -lgoldilocks -lpthread -ldl -lm -lrt
